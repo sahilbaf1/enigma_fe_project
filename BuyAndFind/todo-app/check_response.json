@@ -1,0 +1,87 @@
+{
+    "_id": "6729da93035da8001af17b53",
+    "qualityRating": "UNKNOWN",
+    "previousQualityRating": "UNKNOWN",
+    "rejectionReason": null,
+    "botId": "x1714729235412",
+    "name": "crm_dbm_remarketing_nov24",
+    "source": "whatsapp",
+    "language": "id",
+    "status": "APPROVED",
+    "channelTransformer": {
+        "namespace": "88837964_4c34_470a_950a_e6fefc117a4e",
+        "wabaID": "292102127324561",
+        "category": "MARKETING",
+        "templateType": "message",
+        "allowCategoryChange": false,
+        "aiGenerated": false
+    },
+    "createdBy": "rachel.retnoayuningratri@baf.id",
+    "template": [
+        {
+            "name": "HEADER",
+            "content": {
+                "type": "IMAGE",
+                "image": {
+                    "link": "https://cdn.yellowmessenger.com/L67ffKsevluk1730797112029.jpg"
+                }
+            }
+        },
+        {
+            "name": "BODY",
+            "content": {
+                "body": "🎉 *Lebih Asyik Berkendara Gaya Klasik!* 😎\n\nHi, *{{nama}}*! 👋\n\n🎉 *Dapetin Diskon Motor Baru Yamaha Fazzio dan Filano hingga 5x cicilan khusus bulan November!*  🥰\n\n*Cek syarat dan ketentuannya di bawah ini ya!* 👇\n\n{{urlTrackingParam1}}\n\n*BAF, Proses Cepat Angsuran Tepat!*\n\nPT Bussan Auto Finance berizin dan diawasi oleh Otoritas Jasa Keuangan ",
+                "type": "TEXT",
+                "columnsMapping": {
+                    "Parameter 1": "nama"
+                },
+                "urlTracking": {
+                    "Parameter 2": {
+                        "type": "static",
+                        "variableMapping": "urlTrackingParam1",
+                        "destinationUrl": "https://www.baf.id/promo/motorbaruyamaha"
+                    }
+                }
+            },
+            "example": {
+                "nama": "RACHEL"
+            }
+        },
+        {
+            "name": "BUTTONS",
+            "content": {
+                "body": [
+                    {
+                        "type": "url:dynamic",
+                        "value": "AJUKAN DISINI",
+                        "url": "https://r2.yel.ac",
+                        "urlTracking": {
+                            "type": "static",
+                            "destination": "https://www.baf.id/application-form?utm_source=remarketingwa"
+                        }
+                    }
+                ],
+                "type": "URL:DYNAMIC"
+            }
+        }
+    ],
+    "__v": 1,
+    "created": "2024-11-05T08:42:59.681Z",
+    "updated": "2024-11-05T08:58:33.082Z",
+    "lastExecutedTime": "2024-11-05T16:00:00.000Z",
+    "media": {
+        "mediaType": "image",
+        "mediaLink": "https://cdn.yellowmessenger.com/L67ffKsevluk1730797112029.jpg",
+        "quickReplies": [
+            {
+                "type": "url:dynamic",
+                "value": "AJUKAN DISINI",
+                "urlTracking": {
+                    "type": "static",
+                    "destination": "https://www.baf.id/application-form?utm_source=remarketingwa"
+                }
+            }
+        ],
+        "quickRepliesLength": 1
+    }
+}
