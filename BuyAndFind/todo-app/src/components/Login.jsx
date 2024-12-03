@@ -1,33 +1,31 @@
-import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch,  } from 'react-redux';
+import { authUser } from '../redux/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const[email, setEmail] = useState("")
     const[password, setPassword] = useState("")
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log("masuk");
-      
       setEmail("")
       setPassword("")
-      try {
-        const response = await axios.post(
-          "url/login", { Email: email, Password: password}
-        );
-        const fetchData = response.data;
-      } catch (error){
-        console.error("Error posting data");
-      }
 
+      dispatch(authUser({Email: email, Password: password}))
+        navigate('/products')
     }
 
-
   return (
-    <div>
-      <form action="" onSubmit={handleSubmit}>
+    <div className='login-container'>
+      <h2>Login</h2>
+      <form id='login-form' action="" onSubmit={handleSubmit}>
+        <div className='input-group'>
         <input 
+        id='email'
             type="email" 
             placeholder = "Email"
             value = {email}
@@ -35,6 +33,8 @@ export default function Login() {
             className = "auth_input"
             required
         />
+        </div>
+        <div className='input-group'>
         <input 
             type="password" 
             placeholder = "Password"
@@ -43,7 +43,8 @@ export default function Login() {
             className = "auth_input"
             required
         />
-        <button type ='submit' className = 'auth_button'> Login </button>
+        </div>
+        <button type ='submit' className = 'login-btn'> Login </button>
       </form>
     </div>
   )

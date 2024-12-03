@@ -1,54 +1,45 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const fetchTodosThunk = createAsyncThunk('auth/login', async() =>{
-    return await fetchTodos();
-})
+const API_URL = 'http://159.223.48.190:8080/api/v1/'
 
-export const addTodosThunk = createAsyncThunk('todos/addTodos', async(title) => {
-    return await addTodosThunk(title);
-})
-
-export const toggleThunk = createAsyncThunk('todos/toggleTodo', async() => {
-    return await toggleTodo();
-})
-
-export const deleteTodoThunk = createAsyncThunk('todos/deleteTodo', async(id) => {
-    return await deleteTodo(id);
-})
-
-const todoSlice = createSlice({
-    name: 'todos',
-    initialState: {
-        items: [],
-    },
-    reducer : {},
-    extraReducers: (builder) => {
-        builder.
-            addCase(fetchTodosThunk.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(fetchTodosThunk.fulfilled, (state,action) => {
-                state.loading = false;
-                state.items = action.payload
-            })
-            .addCase(fetchTodosThunk.rejected, (state,action) => {
-                state.loading = false;
-                state.error = "Failed to fetch todos"
-            })
-            .addCase(fetchTodosThunk.fulfilled, (state, action) => {
-                state.items.push(action.payload);
-            })
-            .addCase(fetchTodosThunk.fulfilled, (state, action) => {
-                const index = state.items.findIndex(item => item.id == action.payload.id)
-                if (index !== -1) {
-                    state.items[index] = action.payload;
+export const authUser = createAsyncThunk(
+    "authUser",
+    async (data) => {
+        try {
+            const response = await axios.post(API_URL + 'auth/login',
+                data,
+                {
+                headers: {
+                    "Content-Type": "application/json",
+                },
             }
+        );
+        return response.data;
+        } catch (error) {
+            throw Error('Failed to create new user');
+        }
+
+    }
+)
+
+export const userDetail = createSlice({
+    name: "auth",
+    initialState: {
+        users: [],
+        loading: false,
+        error: null,
+    },
+    extraReducers: (builder) => {
+        builder
+        .addCase(authUser.pending, (state) => {
+            state.loading = true;
         })
-        .addCase(fetchTodosThunk.fulfilled, (state, action) => {
-            state.items = state.items.filter(item => item.id == action.payload.id)
+        .addCase(authUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.users.push(action.payload);
         })
     }
-
 })
 
-export default todoSlice.reducer
+export default userDetail.reducer;
