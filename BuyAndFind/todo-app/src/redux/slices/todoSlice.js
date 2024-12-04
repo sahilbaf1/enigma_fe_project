@@ -1,12 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = 'http://159.223.48.190:8080/api/v1/'
-
 export const fetchProduct = createAsyncThunk('products/fetchAll', 
     async() => {
         try {
-            const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+            const response = await axios.get('/api/v1/products');
             return response.data;
         } catch (error) {
             throw Error("Failed to Retrieve the Data")
@@ -17,7 +15,7 @@ export const fetchProduct = createAsyncThunk('products/fetchAll',
 export const productDetail = createAsyncThunk('products/fetchDetail',
     async(productId) => {
         try {
-            const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+            const response = await axios.post('/api/v1/products', {
                 productId
             });
             return response.data;

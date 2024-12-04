@@ -15,8 +15,21 @@ export default function Login() {
       setEmail("")
       setPassword("")
 
-      dispatch(authUser({Email: email, Password: password}))
-        navigate('/products')
+      try {
+        const response = await dispatch(
+          authUser({Email: email, Password: password})
+        ).unwrap();
+
+        if (response.status.code === 200) {
+          navigate('/products')
+        } else {
+          console.error('Login failed:', response.description);
+          alert('Login gagal. Silakan periksa email dan password Anda.');
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+        alert('Terjadi kesalahan saat login. Silakan coba lagi.');
+      }
     }
 
   return (

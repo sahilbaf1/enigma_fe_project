@@ -18,28 +18,32 @@ export function Products() {
             <table className="custome-table">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Stok</th>
+                        <th>Description</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map((row) => {
-                        {row.id}
-                        <tr key={row.id}>
-                        <td>{row.title}</td>
-                        <td>{row.user}</td>
-                        <td>{row.body}</td>
-                        <td>{row.body}</td>
+                    {items.data?.map((row) => {
+                        return (
+                        <tr key={row.ID}>
+                        <td>{row.Name}</td>
+                        <td>{row.Price}</td>
+                        <td>{row.Qty}</td>
+                        <td>{row.Description}</td>
                         <td>
-                            <Link to={`/products/${row.id}`}>
+                            <img src={row.Image} alt={row.Name} className="table-image" />
+                        </td>
+                        <td>
+                            <Link to={`/products/${row.ID}`}>
                             <button className="view-button">DETAIL</button>
                             </Link>
                         </td>
-                    </tr>
+                        </tr>
+                        )
                     })}
                 </tbody>
             </table>
